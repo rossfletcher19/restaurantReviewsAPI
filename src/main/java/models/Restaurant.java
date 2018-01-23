@@ -9,7 +9,7 @@ public class Restaurant {
     private String phone;
     private String website;
     private String email;
-    private int idRestaurant;
+    private int restaurantId;
 
     public Restaurant(String name, String address, String zipcode, String phone) {
         this.name = name;
@@ -54,10 +54,9 @@ public class Restaurant {
         return email;
     }
 
-    public int getIdRestaurant() {
-        return idRestaurant;
+    public int getRestaurantId() {
+        return restaurantId;
     }
-
 
     //SETTER
     public void setName(String name) {
@@ -84,12 +83,11 @@ public class Restaurant {
         this.email = email;
     }
 
-    public void setIdRestaurant(int id) {
-        this.idRestaurant = id;
+    public void setRestaurantId(int restaurantId) {
+        this.restaurantId = restaurantId;
     }
 
     //EQUALS AND HASHCODE
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -97,7 +95,7 @@ public class Restaurant {
 
         Restaurant that = (Restaurant) o;
 
-        if (idRestaurant != that.idRestaurant) return false;
+        if (restaurantId != that.restaurantId) return false;
         if (!name.equals(that.name)) return false;
         if (address != null ? !address.equals(that.address) : that.address != null) return false;
         if (zipcode != null ? !zipcode.equals(that.zipcode) : that.zipcode != null) return false;
@@ -114,7 +112,7 @@ public class Restaurant {
         result = 31 * result + (phone != null ? phone.hashCode() : 0);
         result = 31 * result + (website != null ? website.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + idRestaurant;
+        result = 31 * result + restaurantId;
         return result;
     }
 }

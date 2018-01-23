@@ -21,7 +21,7 @@ public class SQL2O_DAO_Review implements DAO_Review {
         try (Connection con = sql2o.open()) {
             int idObject = (int) con.createQuery(sql)
                     .bind(review)
-                    .addColumnMapping("idRestaurant", "idRestaurant")
+                    .addColumnMapping("restaurantId", "restaurantId")
                     .executeUpdate()
                     .getKey();
             review.setIdReview(idObject);
@@ -31,11 +31,11 @@ public class SQL2O_DAO_Review implements DAO_Review {
     }
 
     @Override
-    public List<Review> getAllReviewsByRestaurant(int idRestaurant) {
-        String sql = "SELECT * FROM reviews WHERE idRestaurant = :idRestaurant";
+    public List<Review> getAllReviewsByRestaurant(int restaurantId) {
+        String sql = "SELECT * FROM reviews WHERE restaurantId = :restaurantId";
         try (Connection con = sql2o.open()) {
             return con.createQuery(sql)
-                    .addParameter("idRestaurant", idRestaurant)
+                    .addParameter("restaurantId", restaurantId)
                     .executeAndFetch(Review.class);
         }
     }

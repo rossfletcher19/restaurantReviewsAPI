@@ -21,11 +21,11 @@ public class SQL2O_DAO_Restaurant implements DAO_Restaurant {
     public void addRestaurant(Restaurant restaurant) {
         String sql = "INSERT INTO restaurants (name, address, zipcode, phone, website, email) VALUES (:name, :address, :zipcode, :phone, :website, :email)";
         try (Connection con = sql2o.open()) {
-            int idRestaurant = (int) con.createQuery(sql)
+            int restaurantId = (int) con.createQuery(sql)
                     .bind(restaurant)
                     .executeUpdate()
                     .getKey();
-            restaurant.setIdRestaurant(idRestaurant);
+            restaurant.setRestaurantId(restaurantId);
         } catch (Sql2oException ex) {
             System.out.println(ex);
         }
@@ -51,18 +51,18 @@ public class SQL2O_DAO_Restaurant implements DAO_Restaurant {
 
 
     @Override
-    public Restaurant findByIdRestaurant(int idRestaurant) {
-        String sql = "SELECT * FROM restaurants WHERE idRestaurant = :idRestaurant";
+    public Restaurant findByIdRestaurant(int restaurantId) {
+        String sql = "SELECT * FROM restaurants WHERE restaurantId = :restaurantId";
         try (Connection con = sql2o.open()) {
             return con.createQuery(sql)
-                    .addParameter("idRestaurant", idRestaurant)
+                    .addParameter("restaurantId", restaurantId)
                     .executeAndFetchFirst(Restaurant.class);
         }
     }
 
     @Override
     public int findRestaurantAverageRating(int restaurantId) {
-        String sql = "SELECT * FROM reviews WHERE idRestaurant = :idRestaurant";
+        String sql = "SELECT * FROM reviews WHERE restaurantId = :restaurantId";
         int reviewTotal = 0;
         try (Connection con = sql2o.open()) {
             List<Review> reviews = con.createQuery(sql)
@@ -95,11 +95,11 @@ public class SQL2O_DAO_Restaurant implements DAO_Restaurant {
     }
 
     @Override
-    public void deleteByIdRestaurants(int idRestaurant) {
-        String sql = "DELETE FROM restaurants WHERE idRestaurant = :idRestaurant";
+    public void deleteByIdRestaurants(int restaurantId) {
+        String sql = "DELETE FROM restaurants WHERE restaurantId = :restaurantId";
             try (Connection con = sql2o.open()) {
             con.createQuery(sql)
-                    .addParameter("idRestaurant", idRestaurant)
+                    .addParameter("restaurantId", restaurantId)
                     .executeUpdate();
         } catch (Sql2oException ex) {
             System.out.println(ex);
