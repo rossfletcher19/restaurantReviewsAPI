@@ -16,7 +16,7 @@ public class SQL2O_DAO_Review implements DAO_Review {
 
     @Override
     public void addReview(Review review) {
-        String sql = "INSERT INTO rewiews (writtenBy, content, rating, idRestaurant2) VALUES (:writtenBy, :content, :rating, :idRestaurant2)";
+        String sql = "INSERT INTO reviews (writtenBy, content, rating, idRestaurant) VALUES (:writtenBy, :content, :rating, :idRestaurant)";
         try (Connection con = sql2o.open()) {
             int idObject = (int) con.createQuery(sql)
                     .bind(review)
@@ -29,11 +29,11 @@ public class SQL2O_DAO_Review implements DAO_Review {
     }
 
     @Override
-    public List<Review> getAllReviewsByRestaurant(int idRestaurant1) {
-        String sql = "SELECT * FROM reviews WHERE idRestaurant2 = :idRestaurant3";
+    public List<Review> getAllReviewsByRestaurant(int idRestaurant) {
+        String sql = "SELECT * FROM reviews WHERE idRestaurant = :idRestaurant";
         try (Connection con = sql2o.open()) {
             return con.createQuery(sql)
-                    .addParameter("idRestaurant3", idRestaurant1)
+                    .addParameter("idRestaurant", idRestaurant)
                     .executeAndFetch(Review.class);
         }
     }

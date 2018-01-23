@@ -19,7 +19,7 @@ public class SQL2O_DAO_Restaurant implements DAO_Restaurant {
 
     @Override
     public void addRestaurant(Restaurant restaurant) {
-        String sql = "INSERT INTO restaurant (name, address, zipcode, phone, website, email) VALUES (:name, :address, :zipcode, :phone, :website, :email)";
+        String sql = "INSERT INTO restaurants (name, address, zipcode, phone, website, email) VALUES (:name, :address, :zipcode, :phone, :website, :email)";
         try (Connection con = sql2o.open()) {
             int idRestaurant = (int) con.createQuery(sql)
                     .bind(restaurant)
@@ -62,7 +62,7 @@ public class SQL2O_DAO_Restaurant implements DAO_Restaurant {
 
     @Override
     public int findRestaurantAverageRating(int restaurantId) {
-        String sql = "SELECT * FROM reviews WHERE idRestaurant2 = :idRestaurant2";
+        String sql = "SELECT * FROM reviews WHERE idRestaurant = :idRestaurant";
         int reviewTotal = 0;
         try (Connection con = sql2o.open()) {
             List<Review> reviews = con.createQuery(sql)

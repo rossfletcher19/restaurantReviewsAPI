@@ -54,10 +54,6 @@ public class Restaurant {
         return email;
     }
 
-    public int getId() {
-        return idRestaurant;
-    }
-
     public int getIdRestaurant() {
         return idRestaurant;
     }

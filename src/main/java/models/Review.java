@@ -1,25 +1,21 @@
 package models;
 
-/**
- * Created by Guest on 1/22/18.
- */
 public class Review {
 
     private String writtenBy;
     private int rating;
     private int idReview;
-    private int idRestaurant2;
+    private int idRestaurant;
     private String content;
 
-    public Review(String writtenBy, int rating, int idRestaurant2, String content) {
+    public Review(String writtenBy, int rating, int idRestaurant, String content) {
         this.writtenBy = writtenBy;
         this.rating = rating;
-        this.idRestaurant2 = idRestaurant2;
+        this.idRestaurant = idRestaurant;
         this.content = content;
     }
 
     // GETTER
-
     public String getWrittenBy() {
         return writtenBy;
     }
@@ -33,16 +29,14 @@ public class Review {
     }
 
     public int getRestaurantId() {
-        return idRestaurant2;
+        return idRestaurant;
     }
 
     public String getContent() {
         return content;
     }
 
-    // SETTERS
-
-
+    // SETTER
     public void setWrittenBy(String writtenBy) {
         this.writtenBy = writtenBy;
     }
@@ -55,8 +49,8 @@ public class Review {
         this.idReview = idReview;
     }
 
-    public void setRestaurantId(int idRestaurant2) {
-        this.idRestaurant2 = idRestaurant2;
+    public void setRestaurantId(int idRestaurant) {
+        this.idRestaurant = idRestaurant;
     }
 
     public void setContent(String content) {
@@ -71,7 +65,7 @@ public class Review {
         Review review = (Review) o;
 
         if (rating != review.rating) return false;
-        if (idRestaurant2 != review.idRestaurant2) return false;
+        if (idRestaurant != review.idRestaurant) return false;
         if (!writtenBy.equals(review.writtenBy)) return false;
         return content.equals(review.content);
     }
@@ -80,7 +74,7 @@ public class Review {
     public int hashCode() {
         int result = writtenBy.hashCode();
         result = 31 * result + rating;
-        result = 31 * result + idRestaurant2;
+        result = 31 * result + idRestaurant;
         result = 31 * result + content.hashCode();
         return result;
     }
