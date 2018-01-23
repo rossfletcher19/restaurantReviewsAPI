@@ -66,20 +66,22 @@ public class SQL2O_DAO_Restaurant implements DAO_Restaurant {
         int reviewTotal = 0;
         try (Connection con = sql2o.open()) {
             List<Review> reviews = con.createQuery(sql)
-                    .addParameter("idRestaurant2", restaurantId)
+                    .addParameter("restaurantId", restaurantId)
                     .executeAndFetch(Review.class);
-            for (Review review : reviews) {
-                reviewTotal += review.getIdReview();
-            } return reviewTotal / reviews.size();
-//            Aaron's for loop.
+            // AARON'S FOR LOOP
 //            for (int i = 0; i < reviews.size(); i++) {
-//                total += reviews.get(i).getRating();
+//                reviewTotal += reviews.get(i).getRating();
+//            } return reviewTotal / reviews.size();
+
+            for (Review review : reviews) {
+                reviewTotal += review.getRating();
+            } return reviewTotal / reviews.size();
         }
     }
 
     @Override
-    public void updateRestaurants(int id, String name, String address, String zipcode, String phone, String website, String email) {
-        String sql = "UPDATE restaurants SET name = :name, address = :address, zipcode = :zipcode, phone = :phone, website = :website, email = :email";
+    public void updateRestaurants(int restaurantId, String name, String address, String zipcode, String phone, String website, String email) {
+        String sql = "UPDATE restaurants SET name = :name, address = :address, zipcode = :zipcode, phone = :phone, website = :website, email = :email WHERE restaurantId = :restaurantId";
         try (Connection con = sql2o.open()) {
             con.createQuery(sql)
                     .addParameter("name", name)

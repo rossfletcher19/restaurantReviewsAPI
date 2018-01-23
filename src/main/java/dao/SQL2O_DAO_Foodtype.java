@@ -18,11 +18,11 @@ public class SQL2O_DAO_Foodtype implements DAO_Foodtype {
     public void addFoodtype(Foodtype foodtype) {
         String sql = "INSERT INTO foodtypes (foodtype) VALUES (:foodtype)";
         try (Connection con = sql2o.open()) {
-            int idFoodtype = (int) con.createQuery(sql)
+            int foodtypeId = (int) con.createQuery(sql)
                     .bind(foodtype)
                     .executeUpdate()
                     .getKey();
-            foodtype.setIdFoodtype(idFoodtype);
+            foodtype.setIdFoodtype(foodtypeId);
         } catch (Sql2oException ex) {
             System.out.println(ex);
         }
@@ -38,22 +38,22 @@ public class SQL2O_DAO_Foodtype implements DAO_Foodtype {
     }
 
     @Override
-    public Foodtype findbyIdFoodtype(int idFoodtype) {
-        String sql = "SELECT * FROM foodtypes WHERE idFoodtype = :idFoodtype";
+    public Foodtype findbyIdFoodtype(int foodtypeId) {
+        String sql = "SELECT * FROM foodtypes WHERE foodtypeId = :foodtypeId";
         try (Connection con = sql2o.open()) {
             return con.createQuery(sql)
-                    .addParameter("idFoodtype", idFoodtype)
+                    .addParameter("foodtypeId", foodtypeId)
                     .executeAndFetchFirst(Foodtype.class);
         }
     }
 
     @Override
-    public void updateFoodtype(int idFoodtype, String foodtype) {
-        String sql = "UPDATE foodtypes SET foodtype = :foodtype WHERE idFoodtype = :idFoodtype";
+    public void updateFoodtype(int foodtypeId, String foodtype) {
+        String sql = "UPDATE foodtypes SET foodtype = :foodtype WHERE foodtypeId = :foodtypeId";
         try (Connection con = sql2o.open()) {
             con.createQuery(sql)
                     .addParameter("foodtype", foodtype)
-                    .addParameter("idFoodtype", idFoodtype)
+                    .addParameter("foodtypeId", foodtypeId)
                     .executeUpdate();
         } catch (Sql2oException ex) {
             System.out.println(ex);
@@ -61,11 +61,11 @@ public class SQL2O_DAO_Foodtype implements DAO_Foodtype {
     }
 
     @Override
-    public void deleteByIdFoodtype(int idFoodtype) {
-        String sql = "DELETE FROM foodtypes WHERE idFoodtype = :idFoodtype";
+    public void deleteByIdFoodtype(int foodtypeId) {
+        String sql = "DELETE FROM foodtypes WHERE foodtypeId = :foodtypeId";
         try (Connection con = sql2o.open()) {
             con.createQuery(sql)
-                    .addParameter("idFoodtype", idFoodtype)
+                    .addParameter("foodtypeId", foodtypeId)
                     .executeUpdate();
         } catch (Sql2oException ex) {
             System.out.println(ex);

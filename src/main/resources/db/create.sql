@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS restaurants (
 );
 
 CREATE TABLE IF NOT EXISTS foodtypes (
- idFoodtypes int PRIMARY KEY auto_increment,
+ foodtypeId int PRIMARY KEY auto_increment,
  foodtype VARCHAR
 );
 

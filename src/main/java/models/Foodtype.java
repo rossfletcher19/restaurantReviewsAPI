@@ -2,7 +2,7 @@ package models;
 
 public class Foodtype {
     private String foodtype;
-    private int idFoodtype;
+    private int foodtypeId;
 
     //CONSTRUCTOR
     public Foodtype(String foodtype) {
@@ -15,7 +15,7 @@ public class Foodtype {
     }
 
     public int getIdFoodtype() {
-        return idFoodtype;
+        return foodtypeId;
     }
 
     //SETTER
@@ -23,8 +23,8 @@ public class Foodtype {
         this.foodtype = foodtype;
     }
 
-    public void setIdFoodtype(int idFoodtype) {
-        this.idFoodtype = idFoodtype;
+    public void setIdFoodtype(int foodtypeId) {
+        this.foodtypeId = foodtypeId;
     }
 
     //EQUALS AND HASHCODE
@@ -35,14 +35,14 @@ public class Foodtype {
 
         Foodtype foodtype = (Foodtype) o;
 
-        if (idFoodtype != foodtype.idFoodtype) return false;
+        if (foodtypeId != foodtype.foodtypeId) return false;
         return foodtype.equals(foodtype.foodtype);
     }
 
     @Override
     public int hashCode() {
         int result = foodtype.hashCode();
-        result = 31 * result + idFoodtype;
+        result = 31 * result + foodtypeId;
         return result;
     }
 }
