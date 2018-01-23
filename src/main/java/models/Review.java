@@ -8,11 +8,11 @@ public class Review {
     private int idRestaurant;
     private String content;
 
-    public Review(String writtenBy, int rating, int idRestaurant, String content) {
+    public Review(String writtenBy, int rating, String content, int idRestaurant) {
         this.writtenBy = writtenBy;
         this.rating = rating;
-        this.idRestaurant = idRestaurant;
         this.content = content;
+        this.idRestaurant = idRestaurant;
     }
 
     // GETTER

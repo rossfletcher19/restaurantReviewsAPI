@@ -16,10 +16,12 @@ public class SQL2O_DAO_Review implements DAO_Review {
 
     @Override
     public void addReview(Review review) {
-        String sql = "INSERT INTO reviews (writtenBy, content, rating, idRestaurant) VALUES (:writtenBy, :content, :rating, :idRestaurant)";
+        String sql = "INSERT INTO reviews (writtenBy, rating, content, restaurantId) VALUES (:writtenBy, :rating, :content, :restaurantId)";
+        System.out.println(review);
         try (Connection con = sql2o.open()) {
             int idObject = (int) con.createQuery(sql)
                     .bind(review)
+                    .addColumnMapping("idRestaurant", "idRestaurant")
                     .executeUpdate()
                     .getKey();
             review.setIdReview(idObject);

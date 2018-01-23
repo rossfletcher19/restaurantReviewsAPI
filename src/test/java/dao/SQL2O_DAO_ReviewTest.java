@@ -31,11 +31,12 @@ public class SQL2O_DAO_ReviewTest {
 
     @Test
     public void addReview() throws Exception {
-        Restaurant restaurant = setupRestaurant();
-        DAO_Restaurant.addRestaurant(restaurant);
-        Review testReview = new Review("Captain Kirk", 3, restaurant.getIdRestaurant(), "foodcoma!");
+        Restaurant testRestaurant = setupRestaurant();
+        DAO_Restaurant.addRestaurant(testRestaurant);
+        Review testReview = new Review("Captain Kirk", 3, "foodcoma!", 1);
         DAO_Review.addReview(testReview);
-        assertEquals("foodcoma!", testReview.getContent());
+        assertEquals(1, testReview.getIdReview());
+
     }
 
 //    @Test

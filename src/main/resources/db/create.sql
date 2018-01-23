@@ -1,7 +1,7 @@
 SET MODE PostgreSQL;
 
 CREATE TABLE IF NOT EXISTS restaurants (
- idRestaurant INT PRIMARY KEY auto_increment,
+ idRestaurant int PRIMARY KEY auto_increment,
  name VARCHAR,
  address VARCHAR,
  zipcode VARCHAR,
@@ -11,14 +11,14 @@ CREATE TABLE IF NOT EXISTS restaurants (
 );
 
 CREATE TABLE IF NOT EXISTS foodtypes (
- idFoodtypes INT PRIMARY KEY auto_increment,
+ idFoodtypes int PRIMARY KEY auto_increment,
  foodtype VARCHAR
 );
 
 CREATE TABLE IF NOT EXISTS reviews (
- idReview INT PRIMARY KEY auto_increment,
+ idReview int PRIMARY KEY auto_increment,
  writtenBy VARCHAR,
+ rating INTEGER,
  content VARCHAR,
- rating VARCHAR,
- idRestaurant INTEGER
+ restaurantId INTEGER
 );
