@@ -6,6 +6,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.sql2o.Sql2o;
 
+import java.util.Arrays;
+
 import static org.junit.Assert.*;
 
 public class SQL2O_DAO_RestaurantTest {
@@ -52,7 +54,7 @@ public class SQL2O_DAO_RestaurantTest {
         Restaurant testRestaurant1 = setupRestaurant();
         DAO_Restaurant.addRestaurant(testRestaurant1);
 
-         assertEquals(2, DAO_Restaurant.getAllRestaurants().size());
+        assertEquals(2, DAO_Restaurant.getAllRestaurants().size());
     }
 
     @Test
@@ -80,7 +82,7 @@ public class SQL2O_DAO_RestaurantTest {
         Restaurant testRestaurant = new Restaurant("Arby's", "1600 Pennsylvania Ave NW, Washington, DC ", "20500", "202-456-1111");
         DAO_Restaurant.addRestaurant(testRestaurant);
 
-        int testRestaurantId =testRestaurant.getRestaurantId();
+        int testRestaurantId = testRestaurant.getRestaurantId();
 
         Review testReview1 = new Review("Wendy", 100, "foodcoma!", testRestaurant.getRestaurantId());
         DAO_Review.addReview(testReview1);
@@ -113,4 +115,7 @@ public class SQL2O_DAO_RestaurantTest {
 
         assertEquals(1, DAO_Restaurant.getAllRestaurants().size());
     }
+
+
+
 }

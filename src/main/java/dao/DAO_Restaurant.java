@@ -6,14 +6,15 @@ import java.util.List;
 public interface DAO_Restaurant {
     //create
     void addRestaurant (Restaurant restaurant);
+    void addRestaurantToFoodtype(Restaurant restaurant, Foodtype foodtype);
 
     //read
-    List<Restaurant> getAllRestaurants();
     List<Restaurant> findByZipcode();
+    List<Restaurant> getAllRestaurants();
+    List<Foodtype> getAllFoodTypesByRestaurant(int restaurantId);
 
     Restaurant findByIdRestaurant(int idRestaurants);
     int findRestaurantAverageRating(int restaurantId);
-
 
 
     //update

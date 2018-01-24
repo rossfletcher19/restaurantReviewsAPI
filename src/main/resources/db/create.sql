@@ -22,3 +22,9 @@ CREATE TABLE IF NOT EXISTS reviews (
  content VARCHAR,
  restaurantId INTEGER
 );
+
+CREATE TABLE IF NOT EXISTS  restaurants_foodtypes (
+id int PRIMARY KEY auto_increment,
+restaurantId  INTEGER,
+foodtypeId INTEGER
+);

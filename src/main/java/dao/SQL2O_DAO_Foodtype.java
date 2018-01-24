@@ -4,6 +4,8 @@ import models.*;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 import org.sql2o.Sql2oException;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class SQL2O_DAO_Foodtype implements DAO_Foodtype {
@@ -29,13 +31,36 @@ public class SQL2O_DAO_Foodtype implements DAO_Foodtype {
     }
 
     @Override
+    public void addRestaurantToFoodtype(Restaurant restaurant, Foodtype foodtype) {
+
+    }
+
+    @Override
+    public void addFoodtypeToRestaurant(Foodtype foodtype, Restaurant restaurant){
+        String sql = "INSERT INTO restaurants_foodtypes (restaurantid, foodtypeid) VALUES (:restaurantId, :foodtypeId)";
+        try (Connection con = sql2o.open()) {
+            con.createQuery(sql)
+                    .addParameter("restaurantId", restaurant.getRestaurantId())
+                    .addParameter("foodtypeId", foodtype.getIdFoodtype())
+                    .executeUpdate();
+        } catch (Sql2oException ex){
+            System.out.println(ex);
+        }
+    }
+
+    @Override
     public List<Foodtype> getAllFoodtypes() {
         String sql = "SELECT * FROM foodtypes";
-        try (Connection con = sql2o.open()) {
+        try(Connection con = sql2o.open()){
             return con.createQuery(sql)
                     .executeAndFetch(Foodtype.class);
         }
     }
+
+//    @Override
+//    public List<Foodtype> getAllFoodTypesByRestaurant(int restaurantId) {
+//        return null;
+//    }
 
     @Override
     public Foodtype findbyIdFoodtype(int foodtypeId) {
@@ -45,6 +70,32 @@ public class SQL2O_DAO_Foodtype implements DAO_Foodtype {
                     .addParameter("foodtypeId", foodtypeId)
                     .executeAndFetchFirst(Foodtype.class);
         }
+    }
+
+
+    @Override
+    public List<Restaurant> getAllRestaurantsForAFoodtype(int foodtypeId) {
+
+        ArrayList<Restaurant> restaurants = new ArrayList<>();
+
+        String joinQuery = "SELECT restaurantid FROM restaurants_foodtypes WHERE foodtypeid = :foodtypeId";
+
+        try (Connection con = sql2o.open()) {
+            List<Integer> allRestaurantIds = con.createQuery(joinQuery)
+                    .addParameter("foodtypeId", foodtypeId)
+                    .executeAndFetch(Integer.class); //what is happening in the lines above?
+
+            for (Integer restaurantId : allRestaurantIds) {
+                String restaurantQuery = "SELECT * FROM restaurants WHERE restaurantId = :restaurantId";
+                restaurants.add(
+                        con.createQuery(restaurantQuery)
+                                .addParameter("restaurantId", restaurantId)
+                                .executeAndFetchFirst(Restaurant.class));
+            } //why are we doing a second sql query - set?
+        } catch (Sql2oException ex){
+            System.out.println(ex);
+        }
+        return restaurants;
     }
 
     @Override
